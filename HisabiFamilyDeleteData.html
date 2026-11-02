@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hisabi Family: delete your data</title>
+<style>
+  :root { --bg: #ffffff; --text: #1a1a1a; --muted: #4a4a4a; --link: #0b57d0; --line: #d9d9d9; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #121212; --text: #ececec; --muted: #c4c4c4; --link: #8ab4f8; --line: #3a3a3a; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.5rem; margin: 0 0 8px; }
+  h2 { font-size: 1.1rem; margin: 28px 0 8px; }
+  p, li { color: var(--muted); }
+  a { color: var(--link); }
+  ol, ul { padding-left: 22px; }
+  .note { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 12px; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Hisabi Family: delete your data</h1>
+  <p>Hisabi Family by HitSoftTech keeps your books on your phone. The cloud (Google Firebase) only carries
+     encrypted changes between family phones, and each one is deleted as soon as the other phone has it
+     (anything left over is deleted automatically after at most 30 days).</p>
+
+  <h2>Delete it in the app</h2>
+  <ol>
+    <li><strong>Your cloud data:</strong> Settings › <em>Delete my cloud data</em>. This deletes what your phone left in the
+        cloud and your sign-in for the app, and asks the family's admin phone to remove you. Your books stay on your phone.</li>
+    <li><strong>A whole family</strong> (main admin phone): Family › <em>Delete family from the cloud</em>. Every document of
+        the family is deleted from the cloud. The books stay on the phones.</li>
+    <li><strong>Only stop syncing:</strong> Settings › <em>Sign out</em>.</li>
+  </ol>
+
+  <h2>Ask us to delete it</h2>
+  <p>If you can't use the app any more (for example, the phone is lost), email
+     <a href="mailto:hitsofttech@gmail.com?subject=Hisabi%20Family%20data%20deletion">hitsofttech@gmail.com</a>
+     from the Google account you used for family sync, with the subject "Hisabi Family data deletion".
+     We delete your sign-in and your family's cloud documents within 30 days and reply when it is done.</p>
+
+  <h2>What is deleted, and what is not</h2>
+  <ul>
+    <li>Deleted: your Firebase sign-in (Google account id and email), the encrypted changes and requests your phone sent,
+        and how far your phone had read. For a family you run: everything of that family in the cloud.</li>
+    <li>Not in the cloud, so nothing to delete there: your books, entries, My data and AI chats. They live only on your
+        phone; to remove them, delete them in the app or uninstall it.</li>
+    <li>Crash reports (Google Firebase Crashlytics) hold no names or amounts and are deleted by Google after 90 days.</li>
+  </ul>
+
+  <p class="note">Contact: <a href="mailto:hitsofttech@gmail.com">hitsofttech@gmail.com</a></p>
+</main>
+</body>
+</html>
