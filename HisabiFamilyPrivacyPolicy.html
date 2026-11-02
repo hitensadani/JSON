@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hisabi Family: privacy policy</title>
+<style>
+  :root { --bg: #ffffff; --text: #1a1a1a; --muted: #4a4a4a; --link: #0b57d0; --line: #d9d9d9; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #121212; --text: #ececec; --muted: #c4c4c4; --link: #8ab4f8; --line: #3a3a3a; }
+  }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; }
+  h2 { font-size: 1.15rem; margin: 30px 0 8px; }
+  p, li, td { color: var(--muted); }
+  a { color: var(--link); }
+  ol, ul { padding-left: 22px; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.95rem; }
+  th, td { text-align: left; vertical-align: top; padding: 6px 8px; border-bottom: 1px solid var(--line); }
+  .small { font-size: 0.9rem; }
+  .note { border-top: 1px solid var(--line); margin-top: 32px; padding-top: 12px; font-size: 0.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Hisabi Family: privacy policy</h1>
+  <p class="small">Last updated: 2 November 2026. Applies to the Hisabi Family Android app (package
+     com.hitsofttech.hisabi.family) by HitSoftTech, version 3.3.1-hf.27 and later.</p>
+
+  <p>Hisabi Family keeps your accounts, entries and "My data" logs <strong>on your phone</strong>. We (HitSoftTech) do
+     not run our own servers, do not show ads, do not use analytics, and do not sell or share your data. The app uses
+     the internet only for the features listed below, and you can turn the internet off completely in
+     Settings › Privacy › <em>Use the internet</em>.</p>
+
+  <h2>1. Data that stays on your phone</h2>
+  <ul>
+    <li>Your books (accounts, entries, budgets), My data logs and their history, reminders and tasks.</li>
+    <li>AI chats, if you keep them. They are stored encrypted in the app's private storage.</li>
+    <li>Daily automatic backups of your book, in the app's folder on your phone (shown in the app). You can copy them
+        elsewhere yourself.</li>
+    <li>An app log is written only if you turn on developer mode.</li>
+  </ul>
+  <p>None of this is sent anywhere unless you use one of the features below. Android's own cloud backup of the app
+     is turned off.</p>
+
+  <h2>2. Data that leaves your phone, and why</h2>
+  <table>
+    <tr><th>Feature</th><th>What is sent</th><th>To whom</th><th>When</th></tr>
+    <tr><td>Family sync over the internet (optional; the app asks once)</td>
+        <td>Your Google sign-in (name, email, account id), and your family's changes, <strong>end-to-end encrypted</strong>
+            with keys that only the family's phones hold. Member names and emails inside the family data are encrypted
+            too.</td>
+        <td>Google Firebase (Authentication, Cloud Firestore), as a relay</td>
+        <td>Only if you choose internet sync. Each change is <strong>deleted from the server as soon as the other
+            phone has it</strong>.</td></tr>
+    <tr><td>Family sync nearby or by file</td>
+        <td>The same encrypted changes</td>
+        <td>Directly to the other phone (Bluetooth / Wi-Fi Direct) or a file you share</td>
+        <td>When you send. No internet is used.</td></tr>
+    <tr><td>AI assistant (optional)</td>
+        <td>What you type or say, and what the request needs: account names, rounded totals, up to 10 entries, My data
+            records, receipt photos you choose, voice in live talk, and earlier lines of the same chat. Scheduled AI
+            tasks you set up send their request at their time.</td>
+        <td>Google Gemini, through Firebase AI or with your own Gemini API key</td>
+        <td>Only after you agree, and only when you use AI. Google's terms apply; on Google's free tier Google may use
+            the content to improve its products.</td></tr>
+    <tr><td>Crash reports (on by default; the app tells you)</td>
+        <td>What went wrong (error and stack trace), the screens just before it, phone model, Android and app version,
+            an install id. <strong>No amounts, names or emails.</strong></td>
+        <td>Google Firebase Crashlytics</td>
+        <td>Only when the app crashes or hits an error. Turn off in Settings › Privacy › Crash reports.</td></tr>
+    <tr><td>Update check</td>
+        <td>A request for the latest version (your IP address is visible to the service)</td>
+        <td>Google Play (Play installs) or GitHub (other installs, only with a token you enter)</td>
+        <td>When the app opens (switch in Settings) or when you tap Check.</td></tr>
+    <tr><td>Exchange rates and prices</td>
+        <td>The currency or security pair</td>
+        <td>Yahoo Finance</td>
+        <td>Only when you tap to fetch a rate.</td></tr>
+    <tr><td>Export to Dropbox or ownCloud</td>
+        <td>The export file you choose</td>
+        <td>Your own Dropbox or ownCloud account</td>
+        <td>Only if you link the account and export.</td></tr>
+  </table>
+  <p class="small">Google acts as our service provider for Firebase and Gemini. Its privacy policy:
+     <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.</p>
+
+  <h2>3. Permissions</h2>
+  <ul>
+    <li><strong>Internet, network state:</strong> the features in section 2.</li>
+    <li><strong>Location, Bluetooth, nearby Wi-Fi devices, local network:</strong> only to find family phones nearby
+        for syncing without internet. Your location is <strong>not</strong> collected or sent.</li>
+    <li><strong>Microphone:</strong> only for voice input and live talk with the AI, when you tap the mic.</li>
+    <li><strong>Notifications, start at boot, wake lock:</strong> reminders, bill alerts and scheduled tasks.</li>
+    <li><strong>Install packages</strong> (not in the Play version): to install updates downloaded from GitHub.</li>
+  </ul>
+
+  <h2>4. How long data is kept</h2>
+  <ul>
+    <li><strong>Cloud (Firebase):</strong> a change is deleted as soon as the receiving phone has it; anything left
+        over is deleted within 30 days. The family's record and key backup stay while the family uses internet sync and
+        are deleted with "Delete family from the cloud". Your Google sign-in record stays until you delete your cloud
+        data.</li>
+    <li><strong>Crash reports:</strong> kept by Google for 90 days.</li>
+    <li><strong>Your phone:</strong> until you delete it in the app or uninstall the app. Settings let you limit how long
+        history, backups and AI chats are kept.</li>
+  </ul>
+
+  <h2>5. Your choices and deleting your data</h2>
+  <ul>
+    <li>Turn the internet, crash reports, AI, update checks and scheduled AI tasks on or off in Settings › Privacy.</li>
+    <li>Delete your cloud data in the app (Settings › <em>Delete my cloud data</em>), or a whole family
+        (Family › <em>Delete family from the cloud</em>), or ask us:
+        <a href="https://hitensadani.github.io/JSON/HisabiFamilyDeleteData.html">how to delete your data</a>.</li>
+    <li>Delete AI chats, history and backups in the app at any time.</li>
+  </ul>
+
+  <h2>6. Security</h2>
+  <p>Family data is encrypted on your phone before it is sent (AES-256-GCM, with keys protected by the Android
+     Keystore), and signed so other phones can check who sent it. The server only sees encrypted data and the account
+     ids it needs to route it. No method is perfectly secure; keep your phone locked and your recovery text safe.</p>
+
+  <h2>7. Children</h2>
+  <p>Hisabi Family is meant for adults managing household money. It is not directed at children under 13, and we do
+     not knowingly collect data from them.</p>
+
+  <h2>8. Open-source software</h2>
+  <p>Hisabi Family includes open-source software from GnuCash Pocket (Apache License 2.0). It is not made or endorsed
+     by the GnuCash project.</p>
+
+  <h2>9. Changes to this policy</h2>
+  <p>We will update this page when the app's data use changes, and change the date at the top. Earlier versions of the
+     app (before 3.3.1-hf.27) kept cloud sync data until the family admin removed it and did not encrypt member names.</p>
+
+  <p class="note">Contact: <a href="mailto:hitsofttech@gmail.com?subject=Hisabi%20Family%20privacy">hitsofttech@gmail.com</a></p>
+</main>
+</body>
+</html>
