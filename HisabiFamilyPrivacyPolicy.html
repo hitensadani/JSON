@@ -29,17 +29,19 @@
      com.hitsofttech.hisabi.family) by HitSoftTech, version 3.3.1-hf.27 and later.</p>
 
   <p>Hisabi Family keeps your accounts, entries and "My data" logs <strong>on your phone</strong>. We (HitSoftTech) do
-     not run our own servers, do not show ads, do not use analytics, and do not sell or share your data. The app uses
-     the internet only for the features listed below, and you can turn the internet off completely in
-     Settings › Privacy › <em>Use the internet</em>.</p>
+     not run our own servers, do not show ads, do not use analytics, and do not sell your data. The app uses the internet
+     only for the features listed below, and you can turn the internet off completely in
+     Settings › Privacy › <em>Use the internet</em> (nearby and file sync still work).</p>
 
   <h2>1. Data that stays on your phone</h2>
   <ul>
     <li>Your books (accounts, entries, budgets), My data logs and their history, reminders and tasks.</li>
-    <li>AI chats, if you keep them. They are stored encrypted in the app's private storage.</li>
-    <li>Daily automatic backups of your book, in the app's folder on your phone (shown in the app). You can copy them
-        elsewhere yourself.</li>
-    <li>An app log is written only if you turn on developer mode.</li>
+    <li>AI chats, if you keep them, stored encrypted in the app's private storage. Chats not used for 90 days move to an
+        archive on the phone that is opened only when you ask.</li>
+    <li>Daily automatic backups of your book, in the app's folder on your phone (shown on Home and in
+        Settings › Data on this phone). You can lock them with a passphrase and copy them elsewhere yourself.</li>
+    <li>An app log is written only if you turn on developer mode; otherwise nothing is logged.</li>
+    <li>Your own Gemini API key, if you add one, stored encrypted with the Android Keystore.</li>
   </ul>
   <p>None of this is sent anywhere unless you use one of the features below. Android's own cloud backup of the app
      is turned off.</p>
@@ -50,7 +52,8 @@
     <tr><td>Family sync over the internet (optional; the app asks once)</td>
         <td>Your Google sign-in (name, email, account id), and your family's changes, <strong>end-to-end encrypted</strong>
             with keys that only the family's phones hold. Member names and emails inside the family data are encrypted
-            too.</td>
+            too. Not encrypted: the Google account ids of the family's members (the server needs them to let only
+            members in), invite codes while they are valid, and when and how large each item is.</td>
         <td>Google Firebase (Authentication, Cloud Firestore), as a relay</td>
         <td>Only if you choose internet sync. Each change is <strong>deleted from the server as soon as the other
             phone has it</strong>.</td></tr>
@@ -58,22 +61,39 @@
         <td>The same encrypted changes</td>
         <td>Directly to the other phone (Bluetooth / Wi-Fi Direct) or a file you share</td>
         <td>When you send. No internet is used.</td></tr>
+    <tr><td>Access code (optional)</td>
+        <td>A one-way hash of the code you type (never the code itself), and a read of the service status</td>
+        <td>Google Firebase (Cloud Firestore)</td>
+        <td>When you enter a code, again every 7 days while the internet is on; the status when you use sync or
+            Firebase AI.</td></tr>
     <tr><td>AI assistant (optional)</td>
-        <td>What you type or say, and what the request needs: account names, rounded totals, up to 10 entries, My data
-            records, receipt photos you choose, voice in live talk, and earlier lines of the same chat. Scheduled AI
-            tasks you set up send their request at their time.</td>
-        <td>Google Gemini, through Firebase AI or with your own Gemini API key</td>
-        <td>Only after you agree, and only when you use AI. Google's terms apply; on Google's free tier Google may use
-            the content to improve its products.</td></tr>
+        <td>What you type or say, and what the request needs: account names, rounded totals and balances, up to 10
+            entries (date, description, rounded amount), My data records and log settings (never a log you keep
+            private), receipt photos you add, your voice in live talk, earlier messages of the same chat, web searches
+            the AI runs for an answer, and the reply text when it is read aloud. Voice typing may go to the phone's
+            speech recognizer (often Google's, online). AI tasks you set up run at their time without a tap and send
+            their request then.</td>
+        <td>Google Gemini, through Firebase AI on HitSoftTech's Firebase project (the default) or with your own Gemini
+            API key</td>
+        <td>Only after you agree, and only when you use AI. Google's
+            <a href="https://ai.google.dev/gemini-api/terms">Gemini API terms</a> apply; on Google's free tier (which
+            this app may use) Google may use prompts and answers to improve its products, and people may review
+            them.</td></tr>
+    <tr><td>App check (Play version)</td>
+        <td>A Google Play Integrity token showing that the request comes from this app as installed from Google Play</td>
+        <td>Google (Play Integrity, Firebase App Check)</td>
+        <td>When the app uses Firebase AI or sync, to protect the shared AI quota.</td></tr>
     <tr><td>Crash reports (on by default; the app tells you)</td>
-        <td>What went wrong (error and stack trace), the screens just before it, phone model, Android and app version,
-            an install id. <strong>No amounts, names or emails.</strong></td>
+        <td>What went wrong (error and stack trace), the names of the screens just before it, phone model, Android and
+            app version, and an install id. <strong>No amounts, names or emails.</strong></td>
         <td>Google Firebase Crashlytics</td>
-        <td>Only when the app crashes or hits an error. Turn off in Settings › Privacy › Crash reports.</td></tr>
+        <td>Only when the app crashes or hits an error, and only while the internet is on. Turn off in
+            Settings › Privacy › Crash reports.</td></tr>
     <tr><td>Update check</td>
         <td>A request for the latest version (your IP address is visible to the service)</td>
-        <td>Google Play (Play installs) or GitHub (other installs, only with a token you enter)</td>
-        <td>When the app opens (switch in Settings) or when you tap Check.</td></tr>
+        <td>Google Play (Play installs), or GitHub (other installs, only with an access token you type in
+            Settings › Updates)</td>
+        <td>When the app opens (switch in Settings › Privacy) or when you tap Check.</td></tr>
     <tr><td>Exchange rates and prices</td>
         <td>The currency or security pair</td>
         <td>Yahoo Finance</td>
@@ -83,14 +103,16 @@
         <td>Your own Dropbox or ownCloud account</td>
         <td>Only if you link the account and export.</td></tr>
   </table>
-  <p class="small">Google acts as our service provider for Firebase and Gemini. Its privacy policy:
-     <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>.</p>
+  <p class="small">Google acts as our service provider for Firebase, Play Integrity and Gemini. Its privacy policy:
+     <a href="https://policies.google.com/privacy">policies.google.com/privacy</a>. Everything above travels encrypted
+     (HTTPS).</p>
 
   <h2>3. Permissions</h2>
   <ul>
     <li><strong>Internet, network state:</strong> the features in section 2.</li>
-    <li><strong>Location, Bluetooth, nearby Wi-Fi devices, local network:</strong> only to find family phones nearby
-        for syncing without internet. Your location is <strong>not</strong> collected or sent.</li>
+    <li><strong>Location, Bluetooth, nearby Wi-Fi devices:</strong> only to find family phones nearby for syncing
+        without internet (Android requires the location permission for this). Your location is <strong>not</strong>
+        read, collected or sent.</li>
     <li><strong>Microphone:</strong> only for voice input and live talk with the AI, when you tap the mic.</li>
     <li><strong>Notifications, start at boot, wake lock:</strong> reminders, bill alerts and scheduled tasks.</li>
     <li><strong>Install packages</strong> (not in the Play version): to install updates downloaded from GitHub.</li>
@@ -98,28 +120,44 @@
 
   <h2>4. How long data is kept</h2>
   <ul>
-    <li><strong>Cloud (Firebase):</strong> a change is deleted as soon as the receiving phone has it; anything left
-        over is deleted within 30 days. The family's record and key backup stay while the family uses internet sync and
-        are deleted with "Delete family from the cloud". Your Google sign-in record stays until you delete your cloud
-        data.</li>
+    <li><strong>Cloud (Firebase):</strong> a change, request or reply is deleted by the phones as soon as the
+        receiving phone has it. Items that could not be delivered carry an expiry time (1 to 30 days; a phone's
+        "read up to" mark 60 days), and the family's phones delete them at their next sync once it has passed. The
+        family's record and its encrypted key backup stay while the family uses internet sync (they expire after a year
+        without use) and are deleted with "Delete family from the cloud". If no phone of a family syncs any more, its
+        last encrypted items stay until a phone syncs again or the family is deleted from the cloud. Your Google
+        sign-in record stays until you delete your cloud data. You can see and delete your own items in
+        Family › your family › Cloud data.</li>
     <li><strong>Crash reports:</strong> kept by Google for 90 days.</li>
-    <li><strong>Your phone:</strong> until you delete it in the app or uninstall the app. Settings let you limit how long
-        history, backups and AI chats are kept.</li>
+    <li><strong>Your phone</strong> (until you delete it or uninstall the app), with these defaults, which you can
+        change in Settings:
+      <ul>
+        <li>My data history (undo) and deleted rows: 1 year (or Forever, or 90 days).</li>
+        <li>AI chats: moved to the archive after 90 days (or 30 or 180) and kept Forever (or 1 year, or 90 days).</li>
+        <li>Automatic backups: the last 10, plus one per month for 12 months; older ones are deleted.</li>
+        <li>App log: none, unless developer mode is on (then the last 3,000 lines).</li>
+      </ul></li>
   </ul>
 
   <h2>5. Your choices and deleting your data</h2>
   <ul>
-    <li>Turn the internet, crash reports, AI, update checks and scheduled AI tasks on or off in Settings › Privacy.</li>
-    <li>Delete your cloud data in the app (Settings › <em>Delete my cloud data</em>), or a whole family
-        (Family › <em>Delete family from the cloud</em>), or ask us:
-        <a href="https://hitensadani.github.io/JSON/HisabiFamilyDeleteData.html">how to delete your data</a>.</li>
-    <li>Delete AI chats, history and backups in the app at any time.</li>
+    <li>Turn the internet, internet sync, crash reports, the update check and scheduled AI tasks on or off in
+        Settings › Privacy. AI is never used until you agree; "Reset privacy consent" in Settings › AI asks again.</li>
+    <li>Delete your cloud data in the app (Settings › <em>Delete my cloud data</em>), single items
+        (Family › your family › <em>Cloud data</em>), or a whole family (Family › <em>Delete family from the
+        cloud</em>), or ask us: <a href="https://hitensadani.github.io/JSON/HisabiFamilyDeleteData.html">how to delete
+        your data</a>.</li>
+    <li>Delete AI chats, history and backups in the app at any time, or everything at once:
+        Settings › Data on this phone › <em>Delete everything on this phone</em>.</li>
   </ul>
 
   <h2>6. Security</h2>
   <p>Family data is encrypted on your phone before it is sent (AES-256-GCM, with keys protected by the Android
-     Keystore), and signed so other phones can check who sent it. The server only sees encrypted data and the account
-     ids it needs to route it. No method is perfectly secure; keep your phone locked and your recovery text safe.</p>
+     Keystore and each family's keys kept apart), and signed so other phones can check who sent it. The server only
+     sees encrypted data plus the account ids, invite codes and times it needs to route it. A phone with an app version
+     from before 3.3.1-hf.27 that joins a family sends its name and email unencrypted in its join request, which is
+     deleted when the admin decides (at most 7 days). No method is perfectly secure; keep your phone locked and your
+     recovery text safe.</p>
 
   <h2>7. Children</h2>
   <p>Hisabi Family is meant for adults managing household money. It is not directed at children under 13, and we do
@@ -131,7 +169,8 @@
 
   <h2>9. Changes to this policy</h2>
   <p>We will update this page when the app's data use changes, and change the date at the top. Earlier versions of the
-     app (before 3.3.1-hf.27) kept cloud sync data until the family admin removed it and did not encrypt member names.</p>
+     app (before 3.3.1-hf.27) kept cloud sync data until the family admin removed it and did not encrypt member
+     names.</p>
 
   <p class="note">Contact: <a href="mailto:hitsofttech@gmail.com?subject=Hisabi%20Family%20privacy">hitsofttech@gmail.com</a></p>
 </main>
