@@ -23,16 +23,21 @@
 <main>
   <h1>Hisabi Family: delete your data</h1>
   <p>Hisabi Family by HitSoftTech keeps your books on your phone. The cloud (Google Firebase) only carries
-     encrypted changes between family phones, and each one is deleted as soon as the other phone has it
-     (anything left over is deleted automatically after at most 30 days).</p>
+     encrypted changes between family phones, and the phones delete each one as soon as the other phone has it.
+     Anything that could not be delivered has an expiry time and is deleted by the family's phones at their next sync
+     after it has passed.</p>
 
   <h2>Delete it in the app</h2>
   <ol>
     <li><strong>Your cloud data:</strong> Settings › <em>Delete my cloud data</em>. This deletes what your phone left in the
         cloud and your sign-in for the app, and asks the family's admin phone to remove you. Your books stay on your phone.</li>
+    <li><strong>Single items:</strong> Family › your family › <em>Cloud data</em> shows what you have in the cloud
+        (kind, date and size, never the contents) and deletes one item or all of yours.</li>
     <li><strong>A whole family</strong> (main admin phone): Family › <em>Delete family from the cloud</em>. Every document of
         the family is deleted from the cloud. The books stay on the phones.</li>
     <li><strong>Only stop syncing:</strong> Settings › <em>Sign out</em>.</li>
+    <li><strong>Everything on the phone:</strong> Settings › Data on this phone › <em>Delete everything on this
+        phone</em> (it offers a backup first), or uninstall the app.</li>
   </ol>
 
   <h2>Ask us to delete it</h2>
@@ -45,10 +50,13 @@
   <ul>
     <li>Deleted: your Firebase sign-in (Google account id and email), the encrypted changes and requests your phone sent,
         and how far your phone had read. For a family you run: everything of that family in the cloud.</li>
-    <li>Not in the cloud, so nothing to delete there: your books, entries, My data and AI chats. They live only on your
-        phone; to remove them, delete them in the app or uninstall it.</li>
+    <li>Not in the cloud, so nothing to delete there: your books, entries, My data, backups and AI chats. They live only
+        on your phone; to remove them, delete them in the app or uninstall it.</li>
     <li>Crash reports (Google Firebase Crashlytics) hold no names or amounts and are deleted by Google after 90 days.</li>
+    <li>What you sent to the AI is handled by Google under the Gemini API terms; we keep no copy of it.</li>
   </ul>
+
+  <p>More in the <a href="https://hitensadani.github.io/JSON/HisabiFamilyPrivacyPolicy.html">privacy policy</a>.</p>
 
   <p class="note">Contact: <a href="mailto:hitsofttech@gmail.com">hitsofttech@gmail.com</a></p>
 </main>
